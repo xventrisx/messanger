@@ -1,0 +1,5 @@
+<form action="/web/registration_user/"  method="post">
+{% csrf_token %}
+{{ registration.as_p }}
+<input value="Зарегестрироватся" type="submit">
+</form>

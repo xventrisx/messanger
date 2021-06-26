@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница приглашения юзера</title>
+</head>
+<body>
+У Вас нет контактов, но вы можете пригласить пользователя, отправив ему приглашение в sms  с кодом приглашения.
+<form action="/web/send_invitation_to_the_number/"  method="post">
+{% csrf_token %}
+{{ form_phone.as_p }}
+<input value="Отправить приглашение" type="submit">
+</body>
+</html>

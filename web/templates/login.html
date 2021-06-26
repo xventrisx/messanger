@@ -1,0 +1,6 @@
+<form action="/web/page_password/"  method="post">
+{% csrf_token %}
+{{ phone_form.as_p }}
+<input value="Ввод" type="submit">
+</form>
+Если Вам реннее пришло сообшщение с кодом приглашения, перейдите по <a href="/web/password_with_sms/"> ссылке</a><br>

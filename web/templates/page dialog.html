@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Диалог с {{ dialog.1.user.username }}</title>
+</head>
+<body>
+Сообщения<br>
+{% for i in messages %}
+{{ i.sender }}<br>
+{{ i.text_message }}<br>
+{{ i.date_created }}<br>
+{% endfor %}
+<form action="/web/search/"  method="get">
+{% csrf_token %}
+{{ messegesform.as_p }}
+<input type="text" name="search">
+<input value="Отправить" type="submit">
+<input type="hidden" name="user_id" value={{ user.id }}>
+</form>
+</body>
+</html>

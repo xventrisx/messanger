@@ -1,0 +1,6 @@
+МОИ КОНТАКТИ<br>
+{% for i in contacts %}
+Ник {{ i.username }}<br>
+Номер телефона {{ i.phone }}<br>
+<a href="/web/chat_with_user/{{ i.id }}/"> Написать сообщение </a><br>
+{% endfor %}

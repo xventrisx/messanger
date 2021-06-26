@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Канал {{ channel.name }}</title>
+</head>
+<body>
+Название канала {{ channel.name }}<br>
+ПУБЛИКАЦИИ.<br>
+{% for i in messages %}
+{{ i.text_message }}<br>
+{{ i.date_created }}<br>
+{% endfor %}
+<a href="/web/view_home_page/"> Главная страница </a><br>
+</body>
+</html>

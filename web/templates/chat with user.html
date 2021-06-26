@@ -1,0 +1,47 @@
+<div class="chat">
+    <div class="chat-header">Диалог с {{ result.dialog_with }}</div>
+    <div class="messages">
+        {% for i in result.messages %}
+        <div class="message">
+            <div class="sender">{{ i.sender }}</div>
+            <div class="message-text">{{ i.text_message }}</div>
+            <span class="message-time">{{ i.date_created }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<textarea id="chat-log" cols="100" rows="20"></textarea><br>
+<input id="chat-message-input" type="text" size="100"><br>
+<input id="chat-message-submit" value="Отправить" type="submit">
+
+
+{% block js %}
+<script>
+        let socket = new WebSocket('ws://localhost:8000/ws/web/chat_with_user/{{ result.dialog.id }}/');
+        socket.onopen = function open() {
+          console.log('WebSockets connection created.');
+        };
+
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        socket.onclose = () => {}
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const dialog_id = {{ result.dialog.id }};
+            const message = messageInputDom.value;
+
+            socket.send(JSON.stringify({
+                'message': message,
+                'dialog_id': dialog_id,
+            }));
+            messageInputDom.value = '';
+        };
+
+</script>
+{% endblock js %}

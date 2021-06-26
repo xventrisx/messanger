@@ -1,0 +1,54 @@
+version: "3.4"
+
+
+services:
+  messanger-redis:
+    image: redis:latest
+    container_name: messanger-redis
+    restart: always
+    volumes:
+      - messanger-redis-data:/data
+    ports:
+      - 6379:6379
+
+  messanger-db:
+    image: postgres:12-alpine
+    container_name: messanger-db
+    restart: always
+    volumes:
+      - messanger-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  messanger-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: messanger-app
+    command: bash start.sh
+    environment:
+      WAIT-HOSTS: messanger-db, messanger-redis
+    env_file:
+      - .env
+    volumes:
+      - .:/home/app/messanger
+      - ./logs:/home/app/logs
+    ports:
+      - 8000:8000
+    tty: true
+    restart: on-failure
+    depends_on:
+      - messanger-db
+      - messanger-redis
+
+volumes:
+  messanger-db-data:
+  messanger-redis-data:
+
+networks:
+  default:
+    name: messanger-net

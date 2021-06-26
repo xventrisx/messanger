@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница создания канала</title>
+</head>
+<body>
+<form action="/web/create_channel/"  method="post">
+{% csrf_token %}
+{{ form_name_chanel.as_p }}
+Выбете пользователей которых Вы хотите видеть подписщиками канала.
+{% for i in contacts %}
+<p><input type="checkbox" name="users_id" value={{ i.id }}> {{ i.username }} </p>
+{% endfor %}
+<input value="Создать" type="submit">
+</form>
+</body>
+</html>

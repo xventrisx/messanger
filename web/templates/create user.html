@@ -1,0 +1,6 @@
+<form action="/web/checking_user/"  method="post">
+{% csrf_token %}
+{{ checkin_form.as_p }}
+<input type="hidden" name="password_sms" value={{ password_sms }}>
+<input value="Зарегестрироватся" type="submit">
+</form>

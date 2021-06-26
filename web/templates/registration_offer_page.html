@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Предложением регистрации</title>
+</head>
+<body>
+<form action="/web/send_invitation_to_the_number/"  method="post">
+{% csrf_token %}
+Номер телефона который Вы указалы не найден в базе. Хотите  отправить сообщение на номер {{ phone }} для верификации, и дальнейшей регистрации?<br>
+<input type="hidden" name="phone" value={{ phone }}>
+<input value="Отправить сообщение" type="submit">
+</form>
+</body>
+</html>

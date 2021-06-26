@@ -1,0 +1,10 @@
+Название групы
+<form action="/web/create_group/"  method="post">
+{% csrf_token %}
+{{ form_add_group.as_p }}
+Выбете пользователей, которых Вы хотите видить в групе.
+{% for i in contacts %}
+<p><input type="checkbox" name="users" value={{ i.id }}> {{ i.username }} </p>
+{% endfor %}
+<input value="Создать" type="submit">
+</form>

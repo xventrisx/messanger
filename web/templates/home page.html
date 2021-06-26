@@ -1,0 +1,20 @@
+<a href="/web/page_create_newe_group/"> Создать новую групу </a><br>
+<a href="/web/page_create_newe_channel/"> Создать канал </a><br>
+<a href="/web/page_my_contact/"> Контакты </a><br>
+<a href="/web/exit"> Выход </a>
+<hr>
+<form action="/web/search/"  method="get">
+<input type="text" name="search">
+<input value="Поис" type="submit">
+<input type="hidden" name="user_id" value={{ user.id }}>
+</form>
+ЧАТЫ - КАНАЛЫ<br>
+{% for x in dialog %}
+<a href="/web/chat_with_user/{{ x.0.user.id }}/"> Чат с {{ x.0.user }} </a> количество новых сообщений {{ x.2 }}<br>
+{%endfor%}
+{% for x in group %}
+Група <a href=" "> {{ x.0.name }} </a> количество новых сообщений {{ x.1 }} <br>
+{%endfor%}
+{% for x in channels %}
+Канал <a href="/web/page_chennel/{{ x.0.id }}/">  {{ x.0.name }} </a> количество новых сообщений {{ x.1 }} <br>
+{%endfor%}
